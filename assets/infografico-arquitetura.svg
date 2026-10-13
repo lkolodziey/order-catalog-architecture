@@ -1,0 +1,208 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="2500" viewBox="0 0 1600 2500" role="img" aria-labelledby="title desc">
+  <title id="title">Evolução da Plataforma de Pedidos e Catálogo</title>
+  <desc id="desc">Infográfico executivo com problemas atuais, arquitetura-alvo Azure e .NET, fluxo de pedido, migração de 30, 60 e 90 dias, evidências da prova local e decisões pendentes.</desc>
+  <defs>
+    <linearGradient id="hero" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#102a43"/>
+      <stop offset="1" stop-color="#164e63"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#16a6a1"/>
+      <stop offset="1" stop-color="#55c2a8"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#102a43" flood-opacity=".09"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto">
+      <path d="M1 1 L10 6 L1 11" fill="none" stroke="#55728a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrowTeal" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto">
+      <path d="M1 1 L10 6 L1 11" fill="none" stroke="#168c88" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      text { font-family: Inter, "Segoe UI", Arial, sans-serif; fill: #17324a; }
+      .eyebrow { font-size: 17px; font-weight: 700; letter-spacing: 2px; }
+      .section { font-size: 29px; font-weight: 750; }
+      .heading { font-size: 23px; font-weight: 700; }
+      .body { font-size: 19px; font-weight: 450; }
+      .small { font-size: 16px; font-weight: 450; }
+      .tiny { font-size: 14px; font-weight: 500; }
+      .muted { fill: #587187; }
+      .white { fill: #ffffff; }
+      .teal { fill: #087f7b; }
+      .orange { fill: #a95716; }
+      .card { fill: #ffffff; stroke: #d7e2e9; stroke-width: 1.5; }
+      .line { stroke: #9bb0be; stroke-width: 2.3; fill: none; marker-end: url(#arrow); }
+      .line-teal { stroke: #168c88; stroke-width: 2.7; fill: none; marker-end: url(#arrowTeal); }
+      .dash { stroke-dasharray: 8 7; }
+    </style>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="1600" height="2500" fill="#f3f7fa"/>
+
+  <!-- Hero -->
+  <rect x="0" y="0" width="1600" height="275" fill="url(#hero)"/>
+  <circle cx="1450" cy="45" r="190" fill="#ffffff" opacity=".035"/>
+  <circle cx="1510" cy="225" r="135" fill="#55c2a8" opacity=".10"/>
+  <text x="92" y="63" class="eyebrow white" opacity=".78">PROPOSTA DE EVOLUÇÃO ARQUITETURAL</text>
+  <text x="92" y="125" class="white" font-size="43" font-weight="760">Pedidos e Catálogo</text>
+  <text x="92" y="168" class="white" font-size="23" opacity=".86">Escalar com segurança, preservar contratos e evoluir sem parada</text>
+  <rect x="92" y="205" width="142" height="38" rx="19" fill="#ffffff" opacity=".13"/>
+  <text x="163" y="230" text-anchor="middle" class="white" font-size="16" font-weight="700">AZURE</text>
+  <rect x="247" y="205" width="142" height="38" rx="19" fill="#ffffff" opacity=".13"/>
+  <text x="318" y="230" text-anchor="middle" class="white" font-size="16" font-weight="700">.NET</text>
+  <text x="1505" y="70" text-anchor="end" class="white" font-size="16" opacity=".76">DESAFIO DE ARQUITETURA</text>
+
+  <!-- Outcome strip -->
+  <g filter="url(#shadow)">
+    <rect x="70" y="300" width="1460" height="145" rx="20" class="card"/>
+  </g>
+  <text x="100" y="338" class="eyebrow teal">ALVOS DO DESAFIO</text>
+  <line x1="100" y1="358" x2="1500" y2="358" stroke="#e5edf2"/>
+  <g text-anchor="middle">
+    <text x="245" y="405" font-size="34" font-weight="760">10×</text><text x="245" y="430" class="small muted">crescimento de tráfego</text>
+    <line x1="420" y1="378" x2="420" y2="428" stroke="#dce6ec"/>
+    <text x="590" y="405" font-size="34" font-weight="760">99,9%</text><text x="590" y="430" class="small muted">disponibilidade mensal</text>
+    <line x1="790" y1="378" x2="790" y2="428" stroke="#dce6ec"/>
+    <text x="960" y="405" font-size="34" font-weight="760">≤ 500 ms</text><text x="960" y="430" class="small muted">p95 para criar pedido</text>
+    <line x1="1165" y1="378" x2="1165" y2="428" stroke="#dce6ec"/>
+    <text x="1340" y="405" font-size="34" font-weight="760">30 / 90</text><text x="1340" y="430" class="small muted">dias: primeira fatia / expansão</text>
+  </g>
+
+  <!-- Current state -->
+  <text x="82" y="510" class="eyebrow orange">01 · PONTO DE PARTIDA</text>
+  <text x="82" y="552" class="section">Quatro problemas que ampliam risco e latência</text>
+  <g filter="url(#shadow)">
+    <rect x="80" y="580" width="350" height="190" rx="18" class="card"/>
+    <rect x="450" y="580" width="350" height="190" rx="18" class="card"/>
+    <rect x="820" y="580" width="350" height="190" rx="18" class="card"/>
+    <rect x="1190" y="580" width="350" height="190" rx="18" class="card"/>
+  </g>
+  <g>
+    <circle cx="119" cy="623" r="20" fill="#fff0df"/><text x="119" y="630" text-anchor="middle" class="orange" font-size="19" font-weight="800">1</text>
+    <text x="151" y="630" class="heading">N+1 no Catálogo</text>
+    <text x="108" y="675" class="body muted">Uma chamada por item</text><text x="108" y="704" class="body muted">atrasa a criação e acopla</text><text x="108" y="733" class="body muted">disponibilidade.</text>
+    <circle cx="489" cy="623" r="20" fill="#fff0df"/><text x="489" y="630" text-anchor="middle" class="orange" font-size="19" font-weight="800">2</text>
+    <text x="521" y="630" class="heading">Sem snapshot de preço</text>
+    <text x="478" y="675" class="body muted">Mudanças no catálogo</text><text x="478" y="704" class="body muted">dificultam auditoria do</text><text x="478" y="733" class="body muted">valor aceito no pedido.</text>
+    <circle cx="859" cy="623" r="20" fill="#fff0df"/><text x="859" y="630" text-anchor="middle" class="orange" font-size="19" font-weight="800">3</text>
+    <text x="891" y="630" class="heading">Retry pode duplicar</text>
+    <text x="848" y="675" class="body muted">Sem chave idempotente,</text><text x="848" y="704" class="body muted">timeout e repetição podem</text><text x="848" y="733" class="body muted">criar novas ordens.</text>
+    <circle cx="1229" cy="623" r="20" fill="#fff0df"/><text x="1229" y="630" text-anchor="middle" class="orange" font-size="19" font-weight="800">4</text>
+    <text x="1261" y="630" class="heading">Evento não atômico</text>
+    <text x="1218" y="675" class="body muted">Falha entre gravação e</text><text x="1218" y="704" class="body muted">publicação pode perder ou</text><text x="1218" y="733" class="body muted">repetir notificações.</text>
+  </g>
+
+  <!-- Target architecture -->
+  <text x="82" y="835" class="eyebrow teal">02 · ARQUITETURA-ALVO</text>
+  <text x="82" y="877" class="section">Fluxo curto para aceitar; processamento assíncrono para notificar</text>
+  <rect x="80" y="905" width="1460" height="640" rx="22" fill="#eaf3f6" stroke="#d2e2e8" stroke-width="1.5"/>
+
+  <!-- Trust boundary label -->
+  <text x="112" y="946" class="eyebrow muted">BORDA PÚBLICA</text>
+  <rect x="105" y="965" width="220" height="118" rx="15" fill="#ffffff" stroke="#bfd0da" stroke-width="1.5"/>
+  <text x="215" y="1005" text-anchor="middle" class="heading">Canais</text>
+  <text x="215" y="1040" text-anchor="middle" class="small muted">Web · Mobile · Parceiros</text>
+  <rect x="375" y="965" width="235" height="118" rx="15" fill="#dff2f0" stroke="#75c2ba" stroke-width="1.5"/>
+  <text x="492" y="1005" text-anchor="middle" class="heading teal">API Management</text>
+  <text x="492" y="1040" text-anchor="middle" class="small muted">OAuth · quotas · versões</text>
+  <rect x="660" y="965" width="300" height="118" rx="15" fill="#ffffff" stroke="#168c88" stroke-width="2.5"/>
+  <text x="810" y="1005" text-anchor="middle" class="heading">Orders API · ASP.NET Core</text>
+  <text x="810" y="1040" text-anchor="middle" class="small muted">Valida · idempotência · domínio</text>
+  <rect x="1010" y="965" width="260" height="118" rx="15" fill="#ffffff" stroke="#bfd0da" stroke-width="1.5"/>
+  <text x="1140" y="1005" text-anchor="middle" class="heading">Catálogo</text>
+  <text x="1140" y="1040" text-anchor="middle" class="small muted">Quote em lote · versão · validade</text>
+  <path d="M325 1024 H365" class="line"/><path d="M610 1024 H650" class="line-teal"/><path d="M960 1024 H1000" class="line-teal"/>
+  <text x="1055" y="1099" class="tiny muted">Síncrono, com deadline</text>
+
+  <!-- Transactional boundary -->
+  <rect x="220" y="1160" width="750" height="185" rx="17" fill="#ffffff" stroke="#168c88" stroke-width="2.5"/>
+  <text x="253" y="1202" class="eyebrow teal">UMA TRANSAÇÃO LOCAL</text>
+  <text x="253" y="1245" class="heading">Banco relacional de Pedidos</text>
+  <g>
+    <rect x="253" y="1270" width="145" height="45" rx="10" fill="#edf4f7"/><text x="325" y="1299" text-anchor="middle" class="small">Pedido</text>
+    <rect x="412" y="1270" width="150" height="45" rx="10" fill="#edf4f7"/><text x="487" y="1299" text-anchor="middle" class="small">Snapshot</text>
+    <rect x="576" y="1270" width="165" height="45" rx="10" fill="#edf4f7"/><text x="658" y="1299" text-anchor="middle" class="small">Idempotência</text>
+    <rect x="755" y="1270" width="180" height="45" rx="10" fill="#dff2f0"/><text x="845" y="1299" text-anchor="middle" class="small teal">Outbox</text>
+  </g>
+  <path d="M810 1083 V1145 H600 V1150" class="line-teal"/>
+  <text x="635" y="1136" class="tiny teal">grava antes de responder</text>
+
+  <!-- Async path -->
+  <text x="1018" y="1192" class="eyebrow muted">CAMINHO ASSÍNCRONO</text>
+  <rect x="1015" y="1210" width="220" height="120" rx="15" fill="#ffffff" stroke="#bfd0da" stroke-width="1.5"/>
+  <text x="1125" y="1252" text-anchor="middle" class="heading">Worker .NET</text>
+  <text x="1125" y="1285" text-anchor="middle" class="small muted">Publica outbox</text>
+  <rect x="1270" y="1210" width="225" height="120" rx="15" fill="#fff4df" stroke="#e7be75" stroke-width="1.5"/>
+  <text x="1382" y="1252" text-anchor="middle" class="heading">Service Bus</text>
+  <text x="1382" y="1285" text-anchor="middle" class="small muted">Topic · DLQ · retry</text>
+  <path d="M970 1260 H1005" class="line-teal"/><path d="M1235 1270 H1260" class="line"/>
+  <path d="M1382 1330 V1388" class="line-teal"/>
+  <text x="1400" y="1366" class="tiny muted">at-least-once</text>
+
+  <rect x="220" y="1400" width="1275" height="90" rx="15" fill="#133a50"/>
+  <text x="255" y="1440" class="white" font-size="19" font-weight="700">Adaptador de parceiro</text>
+  <text x="255" y="1470" class="white" font-size="16" opacity=".82">Webhook assinado · backoff com jitter · deduplicação · reconciliação auditada</text>
+  <path d="M1382 1330 V1388" class="line-teal"/>
+  <text x="1110" y="1518" class="tiny muted">Telemetria: traces + métricas + logs redigidos (Azure Monitor / Application Insights)</text>
+
+  <!-- Flow -->
+  <text x="82" y="1620" class="eyebrow teal">03 · CRIAÇÃO DE PEDIDO</text>
+  <text x="82" y="1662" class="section">Cinco passos; sem esperar pela notificação externa</text>
+  <g filter="url(#shadow)">
+    <rect x="80" y="1690" width="270" height="150" rx="17" class="card"/>
+    <rect x="380" y="1690" width="270" height="150" rx="17" class="card"/>
+    <rect x="680" y="1690" width="270" height="150" rx="17" class="card"/>
+    <rect x="980" y="1690" width="270" height="150" rx="17" class="card"/>
+    <rect x="1280" y="1690" width="240" height="150" rx="17" class="card"/>
+  </g>
+  <g>
+    <circle cx="117" cy="1730" r="18" fill="#dff2f0"/><text x="117" y="1737" text-anchor="middle" class="teal" font-size="17" font-weight="800">1</text>
+    <text x="146" y="1737" class="heading">Chave + pedido</text><text x="108" y="1780" class="small muted">Cliente autenticado envia</text><text x="108" y="1806" class="small muted">Idempotency-Key.</text>
+    <circle cx="417" cy="1730" r="18" fill="#dff2f0"/><text x="417" y="1737" text-anchor="middle" class="teal" font-size="17" font-weight="800">2</text>
+    <text x="446" y="1737" class="heading">Cotação bulk</text><text x="408" y="1780" class="small muted">Catálogo valida itens,</text><text x="408" y="1806" class="small muted">preço e moeda.</text>
+    <circle cx="717" cy="1730" r="18" fill="#dff2f0"/><text x="717" y="1737" text-anchor="middle" class="teal" font-size="17" font-weight="800">3</text>
+    <text x="746" y="1737" class="heading">Commit atômico</text><text x="708" y="1780" class="small muted">Pedido + snapshot + chave</text><text x="708" y="1806" class="small muted">+ evento outbox.</text>
+    <circle cx="1017" cy="1730" r="18" fill="#dff2f0"/><text x="1017" y="1737" text-anchor="middle" class="teal" font-size="17" font-weight="800">4</text>
+    <text x="1046" y="1737" class="heading">Resposta rápida</text><text x="1008" y="1780" class="small muted">201 novo; replay devolve</text><text x="1008" y="1806" class="small muted">o mesmo pedido.</text>
+    <circle cx="1317" cy="1730" r="18" fill="#fff0df"/><text x="1317" y="1737" text-anchor="middle" class="orange" font-size="17" font-weight="800">5</text>
+    <text x="1346" y="1737" class="heading">Publica depois</text><text x="1308" y="1780" class="small muted">Worker envia evento;</text><text x="1308" y="1806" class="small muted">parceiro processa.</text>
+  </g>
+  <path d="M350 1765 H370" class="line-teal"/><path d="M650 1765 H670" class="line-teal"/><path d="M950 1765 H970" class="line-teal"/><path d="M1250 1765 H1270" class="line-teal"/>
+
+  <!-- Roadmap -->
+  <text x="82" y="1910" class="eyebrow teal">04 · ENTREGA PROGRESSIVA</text>
+  <text x="82" y="1952" class="section">Reduzir risco antes de ampliar tráfego</text>
+  <line x1="150" y1="2010" x2="1445" y2="2010" stroke="#9bb0be" stroke-width="4"/>
+  <g>
+    <circle cx="180" cy="2010" r="15" fill="#168c88"/><text x="180" y="2060" text-anchor="middle" font-size="25" font-weight="760">30 dias</text>
+    <text x="180" y="2094" text-anchor="middle" class="small muted">Idempotência + outbox</text><text x="180" y="2118" text-anchor="middle" class="small muted">contratos + canary</text>
+    <circle cx="800" cy="2010" r="15" fill="#168c88"/><text x="800" y="2060" text-anchor="middle" font-size="25" font-weight="760">60 dias</text>
+    <text x="800" y="2094" text-anchor="middle" class="small muted">Quote em lote + snapshot</text><text x="800" y="2118" text-anchor="middle" class="small muted">Service Bus + parceiro piloto</text>
+    <circle cx="1420" cy="2010" r="15" fill="#168c88"/><text x="1420" y="2060" text-anchor="middle" font-size="25" font-weight="760">90 dias</text>
+    <text x="1420" y="2094" text-anchor="middle" class="small muted">Novos canais + segundo país</text><text x="1420" y="2118" text-anchor="middle" class="small muted">após validação legal e de escala</text>
+  </g>
+
+  <!-- Proof and tradeoffs -->
+  <rect x="80" y="2170" width="700" height="230" rx="20" fill="#e2f3ed" stroke="#b7ddce" stroke-width="1.5"/>
+  <text x="115" y="2212" class="eyebrow teal">PROVA LOCAL · .NET + SQLITE</text>
+  <text x="115" y="2252" class="heading">O que já foi demonstrado</text>
+  <text x="115" y="2290" class="body">✓ Retry igual → mesmo orderId</text>
+  <text x="115" y="2322" class="body">✓ Payload divergente → HTTP 409</text>
+  <text x="115" y="2354" class="body">✓ Snapshot e leitura v1 compatível</text>
+  <text x="115" y="2382" class="tiny muted">Prova local; sem provisionamento Azure nem teste de carga 10×.</text>
+
+  <rect x="810" y="2170" width="710" height="230" rx="20" fill="#ffffff" stroke="#d7e2e9" stroke-width="1.5"/>
+  <text x="845" y="2212" class="eyebrow orange">TRADE-OFFS E VALIDAÇÕES</text>
+  <text x="845" y="2252" class="body"><tspan font-weight="700">At-least-once:</tspan> duplicatas são possíveis; consumidor idempotente.</text>
+  <text x="845" y="2286" class="body"><tspan font-weight="700">Consistência eventual:</tspan> desacopla pedidos de parceiros.</text>
+  <text x="845" y="2320" class="body"><tspan font-weight="700">A confirmar:</tspan> país, residência, volume e quote do Catálogo.</text>
+  <text x="845" y="2354" class="body"><tspan font-weight="700">Plataforma:</tspan> Container Apps é baseline, comparar com AKS/App Service.</text>
+  <text x="845" y="2382" class="tiny muted">Detalhes, premissas, riscos e ADRs estão documentados no repositório.</text>
+
+  <!-- Footer -->
+  <rect x="0" y="2430" width="1600" height="70" fill="#102a43"/>
+  <text x="82" y="2474" class="white" font-size="15" opacity=".86">Arquitetura de referência · decisões propostas para validação · contratos atuais preservados por pelo menos 6 meses</text>
+  <text x="1518" y="2474" text-anchor="end" class="white" font-size="15" opacity=".86">order-catalog-architecture</text>
+</svg>

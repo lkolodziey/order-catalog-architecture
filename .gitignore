@@ -1,7 +1,2 @@
-proof/bin/
-proof/obj/
-proof/.idea/
-proof/*.db
-proof/*.db-shm
-proof/*.db-wal
-.data/
+.codex-build/
+presentations/.staging/

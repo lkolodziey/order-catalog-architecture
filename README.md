@@ -28,6 +28,12 @@ Evoluir por fatias compatíveis, proteger a criação de pedidos com idempotênc
 | [Prova executável](proof/README.md) | Implementação .NET, dados sintéticos e um comando de execução. |
 | [Pipeline](.github/workflows/verify.yml) | Build e execução automatizada dos cenários da prova em push e pull request. |
 
+![Infográfico executivo da evolução da Plataforma de Pedidos e Catálogo](assets/infografico-arquitetura.svg)
+
+Arquivo vetorial: [abrir o infográfico em SVG](assets/infografico-arquitetura.svg).
+
+Apresentação curta: [Arquitetura de Pedidos e Catálogo](presentations/arquitetura-pedidos-catalogo-v3.pptx).
+
 ## Requisitos-chave do enunciado
 
 - Crescimento projetado de tráfego de 10×; disponibilidade mensal esperada de 99,9%; p95 de criação de pedido ≤ 500 ms.
