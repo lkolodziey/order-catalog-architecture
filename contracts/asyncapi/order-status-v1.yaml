@@ -1,0 +1,51 @@
+asyncapi: 3.0.0
+info:
+  title: Order Status Events
+  version: 1.0.0
+  description: Versioned status event contract for partner notification.
+defaultContentType: application/json
+servers:
+  azureServiceBus:
+    host: '{namespace}.servicebus.windows.net'
+    protocol: amqp
+    description: Placeholder; namespace, tier, network and auth are environment decisions.
+    variables:
+      namespace:
+        default: example
+channels:
+  orders.status.changed:
+    address: orders.status.changed
+    messages:
+      OrderStatusChanged:
+        $ref: '#/components/messages/OrderStatusChanged'
+operations:
+  publishOrderStatusChanged:
+    action: send
+    channel: { $ref: '#/channels/orders.status.changed' }
+    messages:
+      - $ref: '#/channels/orders.status.changed/messages/OrderStatusChanged'
+components:
+  messages:
+    OrderStatusChanged:
+      name: OrderStatusChanged
+      title: Order status changed
+      headers:
+        type: object
+        properties:
+          messageId: { type: string, description: Stable event identifier used for deduplication. }
+          correlationId: { type: string }
+      payload:
+        $ref: '#/components/schemas/OrderStatusChangedPayload'
+  schemas:
+    OrderStatusChangedPayload:
+      type: object
+      additionalProperties: true
+      required: [eventId, schemaVersion, orderId, status, occurredAtUtc, sequence]
+      properties:
+        eventId: { type: string, format: uuid }
+        schemaVersion: { type: string, const: '1.0' }
+        orderId: { type: string, format: uuid }
+        status: { type: string, enum: [Accepted, Pending, Confirmed, Processing, Shipped, Cancelled] }
+        occurredAtUtc: { type: string, format: date-time }
+        sequence: { type: integer, minimum: 1 }
+        partnerRef: { type: string, description: Optional opaque partner reference; no direct PII. }

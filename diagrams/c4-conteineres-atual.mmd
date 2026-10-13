@@ -1,0 +1,10 @@
+flowchart TB
+  subgraph Existing["Sistema atual inferido — validar no discovery"]
+    Client["Web nacional"] --> API["API / aplicação de Pedidos"]
+    API -->|"N chamadas síncronas por pedido"| CatalogAPI["API de Catálogo"]
+    API --> OrderDB[("Persistência de Pedidos\nSem snapshot informado")]
+    API -.->|"Publicação fora da transação"| Broker["Canal/broker de eventos\nTecnologia desconhecida"]
+  end
+  Consumer["Consumidores atuais\nA inventariar"] --> Broker
+  classDef external fill:#fff4dd,stroke:#9a6700,color:#241b00;
+  class Client,CatalogAPI,Consumer external;

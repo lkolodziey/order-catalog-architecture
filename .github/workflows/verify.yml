@@ -1,0 +1,24 @@
+name: Verify architecture proof
+
+on:
+  push:
+    paths:
+      - '**'
+  pull_request:
+    paths:
+      - '**'
+
+jobs:
+  verify-dotnet-proof:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Build proof
+        run: dotnet build ./proof/OrdersProof.csproj --configuration Release
+        shell: pwsh
+      - name: Run positive and negative scenarios
+        run: ./proof/run-proof.ps1
+        shell: pwsh

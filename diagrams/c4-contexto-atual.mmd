@@ -1,0 +1,10 @@
+flowchart LR
+  Web["Pessoa compradora\nCanal web nacional"]
+  Orders["Sistema de Pedidos\nBackend atual inferido"]
+  Catalog["Sistema de Catálogo\nProdutos / preços"]
+  Events["Consumidores de eventos\nNão detalhados no enunciado"]
+  Web -->|"API atual: contrato a descobrir"| Orders
+  Orders -->|"Consulta síncrona por item (N+1)"| Catalog
+  Orders -.->|"Evento sem garantia transacional"| Events
+  classDef external fill:#fff4dd,stroke:#9a6700,color:#241b00;
+  class Web,Catalog,Events external;

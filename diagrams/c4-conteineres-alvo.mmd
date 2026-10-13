@@ -1,0 +1,30 @@
+flowchart TB
+  subgraph Public["Zona pública"]
+    Clients["Web / Mobile / parceiros"]
+  end
+  subgraph Edge["Borda protegida"]
+    APIM["API Management\nOAuth/OIDC, quotas, versões"]
+  end
+  subgraph App["Workloads privados — Azure Container Apps (baseline)"]
+    API["Orders API\nASP.NET Core"]
+    OutboxWorker["Outbox Publisher\n.NET Worker"]
+    Delivery["Partner Delivery Worker\n.NET Worker"]
+  end
+  subgraph Data["Dados e mensageria — identidade gerenciada"]
+    SQL[("Banco gerenciado\nOrders + Idempotency + Outbox")]
+    SB["Service Bus Topic\nSubscriptions / DLQ"]
+    KV["Key Vault\nSegredos/certificados de integração"]
+  end
+  Catalog["Catálogo\nBulk quote / versão"]
+  Clients -->|"HTTPS"| APIM -->|"rota autenticada"| API
+  API -->|"quote com timeout/deadline"| Catalog
+  API -->|"transação local"| SQL
+  OutboxWorker -->|"lê pendentes / marca publicação"| SQL
+  OutboxWorker -->|"MessageId estável"| SB
+  SB --> Delivery
+  Delivery -->|"HTTPS assinado e retry limitado"| Clients
+  API -.->|"config/credenciais por identidade"| KV
+  Delivery -.-> KV
+  API -.-> OBS["Azure Monitor + Application Insights\nOpenTelemetry, traces, métricas, logs redigidos"]
+  OutboxWorker -.-> OBS
+  Delivery -.-> OBS

@@ -1,0 +1,18 @@
+flowchart LR
+  Web["Web"] --> APIM["Azure API Management"]
+  Mobile["Aplicativo móvel"] --> APIM
+  Partner["Marketplaces / parceiros"] --> APIM
+  APIM --> Orders["Plataforma de Pedidos\nASP.NET Core / .NET"]
+  Orders --> Catalog["Catálogo / cotação em lote"]
+  Orders --> DB[("Banco relacional\nPedido + snapshot + idempotência + outbox")]
+  DB --> Worker["Worker .NET\nPublicador outbox"]
+  Worker --> Bus["Azure Service Bus"]
+  Bus --> Notify["Adaptador de notificação\nWebhook / integração"]
+  Notify --> Partner
+  Orders -.-> Monitor["Azure Monitor / Application Insights"]
+  Worker -.-> Monitor
+  subgraph Trust["Fronteiras de confiança"]
+    APIM
+  end
+  classDef external fill:#fff4dd,stroke:#9a6700,color:#241b00;
+  class Web,Mobile,Partner,Catalog external;

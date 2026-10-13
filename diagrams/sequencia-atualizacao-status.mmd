@@ -1,0 +1,31 @@
+sequenceDiagram
+  autonumber
+  participant U as Comando interno/autorizado
+  participant A as Orders API / domínio
+  participant D as Banco de Pedidos
+  participant W as Outbox Worker
+  participant B as Service Bus Topic
+  participant N as Adaptador do parceiro
+  participant P as Endpoint do parceiro
+  U->>A: Solicita transição de status
+  A->>A: Valida máquina de estados e autorização
+  A->>D: BEGIN: atualiza status + grava evento na outbox
+  D-->>A: COMMIT
+  A-->>U: Transição aceita
+  W->>D: Busca outbox pendente
+  D-->>W: OrderStatusChanged (eventId/schemaVersion)
+  W->>B: Publica MessageId estável
+  B-->>W: Confirma aceite
+  W->>D: Marca publicado
+  B->>N: Entrega at-least-once
+  N->>N: Deduplica eventId e aplica política de parceiro
+  N->>P: POST webhook assinado
+  alt 2xx / confirmação
+    P-->>N: Confirmação
+    N->>D: Registra tentativa entregue
+  else timeout/5xx transitório
+    P--xN: Falha ou resposta perdida
+    N->>N: Backoff com jitter e limite
+  else erro permanente ou esgotamento
+    N->>D: Registra falha; DLQ/estado de intervenção
+  end

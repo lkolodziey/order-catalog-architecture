@@ -1,0 +1,32 @@
+sequenceDiagram
+  autonumber
+  actor C as Cliente autenticado
+  participant G as API Management
+  participant A as Orders API (.NET)
+  participant K as Catálogo
+  participant D as Banco de Pedidos
+  participant W as Outbox Worker
+  participant B as Service Bus
+  C->>G: POST /v1/orders + Idempotency-Key
+  G->>A: Autentica, aplica quota, encaminha
+  A->>A: Valida contrato e calcula fingerprint
+  A->>D: Procura chave pelo tenant/operação
+  alt chave já existe e payload igual
+    D-->>A: Pedido/resultado original
+    A-->>C: Mesmo resultado, sem nova ordem
+  else chave existe e payload diverge
+    D-->>A: Registro com fingerprint diferente
+    A-->>C: 409 Idempotency-Key reutilizada
+  else chave inédita
+    A->>K: Cotação/validação bulk com deadline
+    K-->>A: Preço, moeda, descrição, versão/validade
+    A->>D: BEGIN: pedido + snapshot + idempotência + outbox
+    D-->>A: COMMIT
+    A-->>C: 201 + orderId + Location
+    W->>D: Lê outbox pendente
+    D-->>W: Evento OrderCreated
+    W->>B: Publica com MessageId estável
+    B-->>W: Aceite
+    W->>D: Marca enviado
+  end
+  Note over W,B: Falha/timeout após envio pode causar repetição; consumidor deduplica/idempotente.
